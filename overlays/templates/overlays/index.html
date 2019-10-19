@@ -1,0 +1,11 @@
+<h1>Overlays</h1>
+
+<a href="{%url 'overlays:new' %}">New overlay</a>
+
+<ul>
+{% for overlay in overlays %}
+<li><a href="{% url 'overlays:show' overlay.id %}">{{ overlay.name }}</a></li>
+{% empty %}
+<li>No overlays yet</li>
+{% endfor %}
+</ul>
