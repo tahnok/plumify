@@ -1,5 +1,5 @@
 from django.db import models
-import google_maps
+from .maps.google_maps import GoogleMaps
 
 class Overlay(models.Model):
     GHG_OFFICE_LATITIUDE = 45.516750
@@ -13,4 +13,4 @@ class Overlay(models.Model):
         return "{} ({})".format(self.id, self.name)
 
     def url(self):
-        return google_maps.GoogleMaps().url(self.latitude, self.longtitude)
+        return GoogleMaps().url(self.latitude, self.longtitude)
