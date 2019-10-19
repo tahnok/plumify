@@ -1,22 +1,9 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 
 
-from .models import Overlay
-
-PLUME_FILE_FIXTURE = "test_fixtures/plume.png"
-
-def create_overlay(name, latitude=Overlay.GHG_OFFICE_LATITIUDE, longtitude=Overlay.GHG_OFFICE_LONGTITUDE):
-    plume = SimpleUploadedFile(name=PLUME_FILE_FIXTURE, content=open(PLUME_FILE_FIXTURE, 'rb').read(), content_type='image/png')
-    overlay = Overlay(
-        name=name,
-        latitude=latitude,
-        longtitude=longtitude,
-        plume=plume,
-    )
-    overlay.save()
-    return overlay
+from ..models import Overlay
+from .factories import PLUME_FILE_FIXTURE, create_overlay
 
 
 class OverlaysViewsTest(TestCase):
