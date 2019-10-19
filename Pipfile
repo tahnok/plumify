@@ -10,6 +10,8 @@ autopep8 = "*"
 [packages]
 django = "*"
 pillow = "*"
+requests = "*"
+httpretty = "*"
 
 [requires]
 python_version = "3.5"

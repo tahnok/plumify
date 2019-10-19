@@ -15,7 +15,8 @@ def new(request):
     if request.method == 'POST':
         overlay_form = OverlayForm(request.POST, request.FILES)
         if overlay_form.is_valid():
-            overlay = overlay_form.save()
+            overlay = overlay_form.save(commit=False)
+            overlay.download_satellite_map_and_save()
             return HttpResponseRedirect(reverse('overlays:show', args=(overlay.id,)))
     else:
         overlay_form = OverlayForm()
