@@ -3,8 +3,8 @@ from django.urls import reverse
 
 from .models import Overlay
 
-def create_overlay(name):
-    return Overlay.objects.create(name=name)
+def create_overlay(name, latitude=Overlay.GHG_OFFICE_LATITIUDE, longtitude=Overlay.GHG_OFFICE_LONGTITUDE):
+    return Overlay.objects.create(name=name, latitude=latitude, longtitude=longtitude)
 
 class OverlaysViewsTest(TestCase):
     def test_empty_index(self):
@@ -34,7 +34,12 @@ class OverlaysViewsTest(TestCase):
 
     def test_create(self):
         name = "Test name"
-        response = self.client.post(reverse('overlays:create'), follow=True, data={'name': name})
+        data = {
+            'name': name,
+            'longtitude': Overlay.GHG_OFFICE_LONGTITUDE,
+            'latitude': Overlay.GHG_OFFICE_LATITIUDE,
+        }
+        response = self.client.post(reverse('overlays:create'), follow=True, data=data)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, name)
         

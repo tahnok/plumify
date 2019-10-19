@@ -14,7 +14,11 @@ def new(request):
     return render(request, 'overlays/new.html')
 
 def create(request):
-    overlay = Overlay(name=request.POST['name'])
+    overlay = Overlay(
+        name=request.POST['name'],
+        latitude=request.POST['latitude'],
+        longtitude=request.POST['longtitude'],
+    )
     overlay.save()
     return HttpResponseRedirect(reverse('overlays:show', args=(overlay.id,)))
 
