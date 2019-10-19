@@ -27,19 +27,19 @@ class OverlaysViewsTest(TestCase):
         # self.assertQuerysetEqual(response.context['overlays'], overlays, ordered=False)
         self.assertEqual(len(response.context['overlays']), 2)
 
-    def test_new(self):
+    def test_get_new(self):
         response = self.client.get(reverse('overlays:new'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Create new overlay")
 
-    def test_create(self):
+    def test_post_new(self):
         name = "Test name"
         data = {
             'name': name,
             'longtitude': Overlay.GHG_OFFICE_LONGTITUDE,
             'latitude': Overlay.GHG_OFFICE_LATITIUDE,
         }
-        response = self.client.post(reverse('overlays:create'), follow=True, data=data)
+        response = self.client.post(reverse('overlays:new'), follow=True, data=data)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, name)
         

@@ -1,15 +1,7 @@
 <h1>Create new overlay</h1>
 
-<form action="{% url 'overlays:create' %}" method="post">
+<form action="{% url 'overlays:new' %}" method="post">
 {% csrf_token %}
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" >
-    <br>
-    <label for="latitude">Latitude</label>
-    <input type="text" name="latitude" id="latitude" >
-    <br>
-    <label for="longtitude">Longtitude</label>
-    <input type="text" name="longtitude" id="longtitude" >
-    <br>
+{{ overlay_form.as_p }}
 <input type="submit" value="Create">
 </form>
