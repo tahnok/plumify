@@ -13,7 +13,7 @@ def index(request):
 
 def new(request):
     if request.method == 'POST':
-        overlay_form = OverlayForm(request.POST)
+        overlay_form = OverlayForm(request.POST, request.FILES)
         if overlay_form.is_valid():
             overlay = overlay_form.save()
             return HttpResponseRedirect(reverse('overlays:show', args=(overlay.id,)))

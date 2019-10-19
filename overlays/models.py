@@ -1,5 +1,9 @@
+import uuid
 from django.db import models
 from .maps.google_maps import GoogleMaps
+
+def plume_path(instance, filename):
+    return 'plumes/{}_{}.png'.format(instance.name, uuid.uuid4())
 
 class Overlay(models.Model):
     GHG_OFFICE_LATITIUDE = 45.516750
@@ -8,6 +12,7 @@ class Overlay(models.Model):
     name = models.CharField(max_length=200)
     latitude = models.FloatField()
     longtitude = models.FloatField()
+    plume = models.ImageField(upload_to=plume_path)
 
     def __str__(self):
         return "{} ({})".format(self.id, self.name)
