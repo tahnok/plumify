@@ -4,8 +4,10 @@ import secrets
 
 class GoogleMaps:
     BASE_URL = 'https://maps.googleapis.com/maps/api/staticmap?'
-    WIDTH = 400
-    HEIGHT = 400
+    WIDTH = 514 # width of sample image
+    HEIGHT = 257 # height of sample plume image
+    # TODO fix zoom to be accurate to 10km x 5km
+    # https://gis.stackexchange.com/questions/7430/what-ratio-scales-do-google-maps-zoom-levels-correspond-to
     ZOOM = 15
     MAP_TYPE = 'satellite'
 
