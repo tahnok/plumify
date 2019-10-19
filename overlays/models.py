@@ -4,6 +4,7 @@ import tempfile
 
 from django.core import files
 from django.db import models
+from PIL import Image
 
 from .maps.google_maps import GoogleMaps
 
@@ -13,6 +14,8 @@ def plume_path(instance, filename):
 def satallite_map_path(instance, filename):
     return 'sat_maps/{}_{}.png'.format(instance.name, uuid.uuid4())
 
+def processed_map_path(instance, filename):
+    return 'processed/{}_{}.png'.format(instance.name, uuid.uuid4())
 
 class Overlay(models.Model):
     GHG_OFFICE_LATITIUDE = 45.516750
@@ -23,6 +26,7 @@ class Overlay(models.Model):
     longtitude = models.FloatField()
     plume = models.ImageField(upload_to=plume_path)
     satallite_map = models.ImageField(upload_to=satallite_map_path, blank=True, null=True)
+    plume_on_satallite_map = models.ImageField(upload_to=processed_map_path, blank=True, null=True)
 
     def __str__(self):
         return "{} ({})".format(self.id, self.name)
@@ -36,7 +40,23 @@ class Overlay(models.Model):
             if not block:
                 break
             temp_file.write(block)
-        self.satallite_map.save("test.png", files.File(temp_file))
+        self.satallite_map.save("ignored.png", files.File(temp_file))
+
+    def generate_plume_on_satallite_map(self):
+        background = Image.open(self.satallite_map).convert('RGBA')
+        foreground = Image.open(self.plume).convert('RGBA')
+        combined = Image.new('RGBA', background.size)
+        combined.paste(background, (0,0), background)
+        combined.paste(foreground, (0,0), foreground)
+        temp_file = tempfile.NamedTemporaryFile()
+        combined.save(fp=temp_file, format='PNG')
+        self.plume_on_satallite_map.save("ignored.png", files.File(temp_file))
+
+    def process_and_save(self):
+        self.download_satellite_map_and_save()
+        self.generate_plume_on_satallite_map()
+
+
 
     def satellite_map_url(self):
         return GoogleMaps().url(self.latitude, self.longtitude)
