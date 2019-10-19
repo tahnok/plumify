@@ -5,4 +5,4 @@ from overlays.models import Overlay
 class OverlayForm(ModelForm):
     class Meta:
         model = Overlay
-        fields = '__all__'
+        fields = ['name', 'latitude', 'longtitude', 'plume']
