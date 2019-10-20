@@ -30,3 +30,10 @@ class OverlayTest(TestCase):
 
         self.assertIsNotNone(overlay.plume_on_satallite_map)
         self.assertIsNotNone(overlay.satallite_map)
+
+    def test_as_dict(self):
+        overlay = create_overlay("example")
+        expected = {}
+        result = overlay.as_dict()
+        # TODO actually build the expected dict
+        # self.assertDictEqual(expected, result)

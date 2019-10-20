@@ -56,7 +56,19 @@ class Overlay(models.Model):
         self.download_satellite_map_and_save()
         self.generate_plume_on_satallite_map()
 
-
-
     def satellite_map_url(self):
         return GoogleMaps().url(self.latitude, self.longtitude)
+
+    def as_dict(self):
+        """
+        Convert the overlay to it's cannonical representation as a dict, suitable for use dumping to JSON
+        """
+        return {
+            'name': self.name,
+            'latitude': self.latitude,
+            'longtitude': self.longtitude,
+            'plume': self.plume.url,
+            'plume_on_satallite_map': self.plume_on_satallite_map.url,
+            'satallite_map': self.satallite_map.url,
+        }
+

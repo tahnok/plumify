@@ -21,6 +21,14 @@ And visit
 
 http://127.0.0.1:8000
 
+## API
+
+Only the show endpoint is built. You can access it at
+
+```
+http://127.0.0.1:8000/<id>.json
+```
+
 ## Development
 
 To develop this app you need to first install [pipenv](https://pipenv.kennethreitz.org/en/latest/)

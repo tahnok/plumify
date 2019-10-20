@@ -1,7 +1,9 @@
+from django.core import serializers
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
+from django.forms.models import model_to_dict
 
 from .models import Overlay
 from .forms import OverlayForm
@@ -24,4 +26,7 @@ def new(request):
 
 def show(request, overlay_id):
     overlay = get_object_or_404(Overlay, pk=overlay_id)
-    return render(request, 'overlays/show.html', {'overlay': overlay})
+    if request.path.endswith(".json"):
+        return JsonResponse(overlay.as_dict())
+    else:
+        return render(request, 'overlays/show.html', {'overlay': overlay})
