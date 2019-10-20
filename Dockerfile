@@ -13,5 +13,4 @@ COPY Pipfile.lock Pipfile.lock
 RUN set -ex && pipenv install --deploy --system
 
 COPY . /code
-CMD scripts/setup
-CMD scripts/server
+RUN scripts/migrate
