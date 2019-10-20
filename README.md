@@ -18,7 +18,7 @@ To develop this app you need to first install [pipenv](https://pipenv.kennethrei
 
 Next you can install all the python packages and setup a virtual env automatically with:
 
-```python
+```
 pipenv install --dev
 ```
 
@@ -41,7 +41,7 @@ scripts/server
 
 You can run the tests with
 
-```shell
+```
 script/tests
 ```
 
