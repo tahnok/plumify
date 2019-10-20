@@ -17,6 +17,10 @@ And then just run:
 docker-compose up
 ```
 
+And visit
+
+http://127.0.0.1:8000
+
 ## Development
 
 To develop this app you need to first install [pipenv](https://pipenv.kennethreitz.org/en/latest/)
