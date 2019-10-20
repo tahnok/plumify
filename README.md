@@ -6,10 +6,15 @@ An app for visualizing plumes on a map. Just enter the co-ordinates, upload a pl
 
 ## Getting Started
 
-If you want to use this app, you can easily get it running with Docker, just run
+If you want to use this app, you can easily get it running with Docker.
+
+First edit `sercrets.py` to set the `GOOGLE_API_KEY` (which you should have gotten a copy of, or [set up your own](https://developers.google.com/maps/documentation/maps-static/intro))
+
+
+And then just run:
 
 ```
-TODO
+docker-compose up
 ```
 
 ## Development

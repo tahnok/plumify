@@ -4,5 +4,7 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+    # - /code/data:/some_stable_path # Note, if you do this, you must re-run the migrations and create an empty folder called media/
     ports:
       - "8000:8000"
