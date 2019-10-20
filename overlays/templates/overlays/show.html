@@ -1,12 +1,43 @@
+{% extends 'overlays/base.html' %}
+
+{% block content %}
 <h1>{{ overlay.name }}</h1>
 
-<p>Co-ordinates: ({{overlay.latitude}}, {{overlay.longtitude}})</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Co-ordinates</h4>
+        <p>Lattitude: {{overlay.latitude}}</p>
+        <p>Longtitude: {{overlay.longtitude}}</p>
+    </div>
+</div>
 
-<h2>Plume on Satallite View</h2>
-<img src="{{overlay.plume_on_satallite_map.url}}" />
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Plume on Satallite Map</h4>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#plume_on_satallite_map" aria-expanded="true" aria-controls="collapseOne">
+            Show/Hide
+        </button>
+    </div>
+    <img id="plume_on_satallite_map" class="map collapse show" src="{{overlay.plume_on_satallite_map.url}}" />
+</div>
 
-<h2>Raw Satallite Map</h2>
-<img src="{{overlay.satallite_map.url}}" />
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Raw Satallite Map</h4>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#satallite_map" aria-expanded="true" aria-controls="collapseOne">
+            Show/Hide
+        </button>
+    </div>
+    <img id="satallite_map" class="map collapse" src="{{overlay.satallite_map.url}}" />
+</div>
 
-<h2>Raw Plume</h2>
-<img src="{{overlay.plume.url}}" />
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Raw Plume</h4>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#plume" aria-expanded="true" aria-controls="collapseOne">
+            Show/Hide
+        </button>
+    </div>
+    <img id="plume" class="map collapse" src="{{overlay.plume.url}}" />
+</div>
+{% endblock %}

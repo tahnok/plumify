@@ -1,7 +1,15 @@
+{% extends 'overlays/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
 <h1>Create new overlay</h1>
 
 <form enctype="multipart/form-data" action="{% url 'overlays:new' %}" method="post">
-{% csrf_token %}
-{{ overlay_form.as_p }}
-<input type="submit" value="Create">
+      <div class="form-group">
+        {% csrf_token %}
+        {{ overlay_form|crispy }}
+        <input type="submit" class="btn btn-primary" value="Create">
+    </div>
 </form>
+{% endblock %}

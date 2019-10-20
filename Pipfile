@@ -12,6 +12,7 @@ django = "*"
 pillow = "*"
 requests = "*"
 httpretty = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.5"
