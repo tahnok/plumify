@@ -61,4 +61,17 @@ class OverlaysViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, name)
 
+    def test_json_show_missing(self):
+        url = reverse('overlays:json_show', args=(404,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_json_show_overlay(self):
+        name = "example"
+        overlay = create_overlay(name)
+        url = reverse('overlays:json_show', args=(overlay.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, name)
+
 
